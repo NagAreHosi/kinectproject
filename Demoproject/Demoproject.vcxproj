@@ -43,7 +43,6 @@
     <ClInclude Include="ColorFrameScheduler.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="FrameScheduler.h" />
     <ClInclude Include="Scheduler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

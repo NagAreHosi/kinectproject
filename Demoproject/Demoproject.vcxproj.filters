@@ -38,8 +38,5 @@
     <ClInclude Include="ColorFrameScheduler.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FrameScheduler.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
