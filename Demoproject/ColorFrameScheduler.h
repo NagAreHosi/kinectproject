@@ -9,14 +9,21 @@ public:
 	ColorFrameScheduler();
 	//ColorFrameScheduler(const ColorFrameScheduler& copy);
 	virtual ~ColorFrameScheduler();
+	virtual HRESULT acquireLatestFrame();
 
-	virtual HRESULT acquireLatestFrame(IColorFrame*& colorFrame);
-	bool getFrameDescription(IFrameDescription*& frameDescription);
 	long long int getFailureTime();
 	long long int getSuccessTime();
+
 private:
+	friend class ColorImage;
+	IColorFrameSource* colorFrameSource;
+	IColorFrameReader* colorFrameReader;
+	IColorFrame* colorFrame;
+	IFrameDescription* description;
 	bool isInitialized;
+	
 	void initSchduler();
+
 	long long int failureTime;
 	long long int successTime;
 };

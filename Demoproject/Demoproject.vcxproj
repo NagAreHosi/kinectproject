@@ -22,6 +22,7 @@
     <ClCompile Include="ColorFrameScheduler.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ColorImage.cpp" />
     <ClCompile Include="draw_bones_demo.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -43,6 +44,7 @@
     <ClInclude Include="ColorFrameScheduler.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="ColorImage.h" />
     <ClInclude Include="Scheduler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

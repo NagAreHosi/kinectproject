@@ -10,28 +10,22 @@ public:
 	Scheduler();
 	//Scheduler(const Scheduler& copy);
 	virtual ~Scheduler();
-
 	virtual HRESULT acquireLatestFrame();
 	template<class Interface>
-	inline void SafeRelease(Interface*& pInterfaceToRelease)
-	{
-		if (pInterfaceToRelease != NULL)
-		{
-			pInterfaceToRelease->Release();
-			pInterfaceToRelease = NULL;
-		}
-	}
-
+	inline void safeRelease(Interface*& pInterfaceToRelease);
 protected:
 	static IKinectSensor* kinectSensor;
 	static HRESULT initKinectSensor();
-
-	IColorFrameSource* colorFrameSource;
-	IColorFrameReader* colorFrameReader;
-
-	IBodyFrameSource* bodyFrameSource;
-	IBodyFrameReader* bodyFrameReader;
-
 private:
 	static bool kSnrIsInitialized;
 };
+
+template<class Interface>
+inline void Scheduler::safeRelease(Interface*& pInterfaceToRelease)
+{
+	if (pInterfaceToRelease != NULL)
+	{
+		pInterfaceToRelease->Release();
+		pInterfaceToRelease = NULL;
+	}
+}

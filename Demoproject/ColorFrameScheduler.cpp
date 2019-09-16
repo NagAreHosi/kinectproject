@@ -8,13 +8,21 @@ ColorFrameScheduler::ColorFrameScheduler()
 	this->failureTime = 0;
 	this->successTime = 0;
 	this->isInitialized = false;
+	this->colorFrameSource = nullptr;
+	this->colorFrameReader = nullptr;
+	this->colorFrame = nullptr;
+	this->description = nullptr;
 	this->initSchduler();
+	if(this->isInitialized)
+		this->colorFrameSource->get_FrameDescription(&this->description);
 }
 
 ColorFrameScheduler::~ColorFrameScheduler()
 {
-	SafeRelease(this->colorFrameReader);
-	SafeRelease(this->colorFrameSource);
+	safeRelease(this->colorFrameReader);
+	safeRelease(this->colorFrameSource);
+	safeRelease(this->colorFrame);
+	safeRelease(this->description);
 }
 
 void ColorFrameScheduler::initSchduler()
@@ -45,34 +53,20 @@ void ColorFrameScheduler::initSchduler()
 	return;
 }
 
-HRESULT ColorFrameScheduler::acquireLatestFrame(IColorFrame*& colorFrame)
+HRESULT ColorFrameScheduler::acquireLatestFrame()
 {
 	HRESULT hr = S_OK;
 	if (this->isInitialized)
 	{
-		hr = this->colorFrameReader->AcquireLatestFrame(&colorFrame);
-		if (FAILED(hr) || colorFrame == nullptr)
+		safeRelease(this->colorFrame);
+		while (FAILED(this->colorFrameReader->AcquireLatestFrame(&this->colorFrame)) || colorFrame == nullptr)
 		{
 			this->failureTime += 1;
-			return hr;
 		}
-
 		this->successTime += 1;
 		return hr;
 	}
-	this->failureTime += 1;
 	return hr;
-}
-
-bool ColorFrameScheduler::getFrameDescription(IFrameDescription*& frameDescription)
-{
-	if (!this->isInitialized)
-	{
-		cerr << "Failure to get frame description!" << endl;
-		return false;
-	}
-	this->colorFrameSource->get_FrameDescription(&frameDescription);
-	return true;
 }
 
 long long int ColorFrameScheduler::getFailureTime()

@@ -30,12 +30,18 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ColorImage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scheduler.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ColorFrameScheduler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorImage.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

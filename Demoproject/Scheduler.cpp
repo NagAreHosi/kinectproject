@@ -28,17 +28,12 @@ HRESULT Scheduler::initKinectSensor()
 
 Scheduler::Scheduler()
 {
-	this->colorFrameSource = nullptr;
-	this->colorFrameReader = nullptr;
-	this->bodyFrameSource = nullptr;
-	this->bodyFrameReader = nullptr;
+	this->initKinectSensor();
 }
 
 Scheduler::~Scheduler()
 {
-	SafeRelease(this->bodyFrameReader);
-	SafeRelease(this->bodyFrameSource);
-	SafeRelease(this->kinectSensor);
+	safeRelease(this->kinectSensor);
 }
 
 HRESULT Scheduler::acquireLatestFrame()
